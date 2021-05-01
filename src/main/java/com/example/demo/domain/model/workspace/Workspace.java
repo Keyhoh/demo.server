@@ -31,4 +31,15 @@ public class Workspace {
         this.tasks = this.tasks.put(task);
         return this.tasks;
     }
+
+    /**
+     * タスクを削除する
+     *
+     * @param task 削除するタスク
+     * @return タスクが削除されたタスクセット
+     */
+    public TaskSet remove(Task task) {
+        this.tasks = this.tasks.remove(task);
+        return this.tasks;
+    }
 }

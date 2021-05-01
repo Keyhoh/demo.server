@@ -42,4 +42,35 @@ class WorkspaceTest {
         List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
         assertThat(actual).hasSize(1);
     }
+
+    @Test
+    void remove_task() {
+        Workspace workspace = new Workspace("test workspace");
+        Task task = Task.prototype();
+        {
+            workspace.add(task);
+            List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
+            assertThat(actual).isNotEmpty();
+        }
+        {
+            workspace.remove(task);
+            List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
+            assertThat(actual).isEmpty();
+        }
+    }
+
+    @Test
+    void remove_the_other_task() {
+        Workspace workspace = new Workspace("test workspace");
+        {
+            workspace.add(Task.prototype());
+            List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
+            assertThat(actual).isNotEmpty();
+        }
+        {
+            workspace.remove(Task.prototype());
+            List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
+            assertThat(actual).isNotEmpty();
+        }
+    }
 }

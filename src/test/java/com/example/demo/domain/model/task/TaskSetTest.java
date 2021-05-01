@@ -49,7 +49,7 @@ class TaskSetTest {
             assertThat(actual).isNotEmpty();
         }
         {
-            tasks = tasks.remove(task.id);
+            tasks = tasks.remove(task);
             List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
             assertThat(actual).isEmpty();
         }
@@ -64,7 +64,7 @@ class TaskSetTest {
             assertThat(actual).isNotEmpty();
         }
         {
-            tasks = tasks.remove(TaskId.generate());
+            tasks = tasks.remove(Task.prototype());
             List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
             assertThat(actual).isNotEmpty();
         }

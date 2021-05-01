@@ -38,12 +38,12 @@ public class TaskSet {
     /**
      * タスクを削除する
      *
-     * @param id 削除するタスクID
+     * @param task 削除するタスク
      * @return タスクが削除されたタスクセット
      */
-    public TaskSet remove(TaskId id) {
+    public TaskSet remove(Task task) {
         Map<TaskId, Task> values = new HashMap<>(this.values);
-        values.remove(id);
+        values.remove(task.id);
         return new TaskSet(values);
     }
 }
