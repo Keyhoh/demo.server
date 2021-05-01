@@ -1,51 +1,52 @@
 package com.example.demo.server.domain.model.workspace;
 
 import com.example.demo.server.domain.model.task.Task;
-import com.example.demo.server.domain.model.task.TaskPOJO;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WorkspaceTest {
     @Test
-    void initial_taskSet_is_empty() {
+    void initial_workspace() {
         Workspace workspace = new Workspace("test workspace");
-        List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
-        assertThat(actual).isEmpty();
+        WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        assertThat(actual.name).isEqualTo("test workspace");
+        assertThat(actual.tasks).isEmpty();
     }
 
     @Test
     void rename() {
-        Workspace actual = new Workspace("test workspace");
-        actual.rename("new workspace name");
-        assertThat(actual.name).isEqualTo("new workspace name");
+        Workspace workspace = new Workspace("test workspace");
+        workspace.rename("new workspace name");
+        assertThat(workspace.name).isEqualTo("new workspace name");
     }
 
     @Test
     void cannot_rename_to_blank() {
-        Workspace actual = new Workspace("test workspace");
-        actual.rename(null);
-        assertThat(actual.name).isEqualTo("test workspace");
-        actual.rename("");
-        assertThat(actual.name).isEqualTo("test workspace");
-        actual.rename(" "); // space
-        assertThat(actual.name).isEqualTo("test workspace");
-        actual.rename("  "); // two spaces
-        assertThat(actual.name).isEqualTo("test workspace");
-        actual.rename("	"); // tab
-        assertThat(actual.name).isEqualTo("test workspace");
-        actual.rename("　"); // full-width space
-        assertThat(actual.name).isEqualTo("test workspace");
+        Workspace workspace = new Workspace("test workspace");
+        String[] blanks = {
+                null,
+                "",
+                " ", // space
+                "  ", // two spaces
+                "	",  // tab
+                "　", // full-width space
+                "\n",
+                "\r\n"
+        };
+        for (String blank : blanks) {
+            workspace.rename(blank);
+            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            assertThat(actual.name).isEqualTo("test workspace");
+        }
     }
 
     @Test
     void put_task() {
         Workspace workspace = new Workspace("test workspace");
         workspace.add(Task.prototype());
-        List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
-        assertThat(actual).isNotEmpty();
+        WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        assertThat(actual.tasks).isNotEmpty();
     }
 
     @Test
@@ -53,8 +54,8 @@ class WorkspaceTest {
         Workspace workspace = new Workspace("test workspace");
         workspace.add(Task.prototype());
         workspace.add(Task.prototype());
-        List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
-        assertThat(actual).hasSize(2);
+        WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        assertThat(actual.tasks).hasSize(2);
     }
 
     @Test
@@ -63,8 +64,8 @@ class WorkspaceTest {
         Task task = Task.prototype();
         workspace.add(task);
         workspace.add(task);
-        List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
-        assertThat(actual).hasSize(1);
+        WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        assertThat(actual.tasks).hasSize(1);
     }
 
     @Test
@@ -73,13 +74,13 @@ class WorkspaceTest {
         Task task = Task.prototype();
         {
             workspace.add(task);
-            List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
-            assertThat(actual).isNotEmpty();
+            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            assertThat(actual.tasks).isNotEmpty();
         }
         {
             workspace.remove(task);
-            List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
-            assertThat(actual).isEmpty();
+            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            assertThat(actual.tasks).isEmpty();
         }
     }
 
@@ -88,13 +89,13 @@ class WorkspaceTest {
         Workspace workspace = new Workspace("test workspace");
         {
             workspace.add(Task.prototype());
-            List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
-            assertThat(actual).isNotEmpty();
+            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            assertThat(actual.tasks).isNotEmpty();
         }
         {
             workspace.remove(Task.prototype());
-            List<TaskPOJO> actual = TaskPOJO.toPOJOList(workspace.tasks);
-            assertThat(actual).isNotEmpty();
+            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            assertThat(actual.tasks).isNotEmpty();
         }
     }
 }
