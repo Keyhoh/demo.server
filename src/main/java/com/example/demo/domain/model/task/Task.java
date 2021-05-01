@@ -2,6 +2,8 @@ package com.example.demo.domain.model.task;
 
 /**
  * タスク
+ * TODO: ステータス
+ * TODO: 期限
  */
 public class Task {
     /**
@@ -23,6 +25,11 @@ public class Task {
         this.description = description;
     }
 
+    /**
+     * 基礎タスクを返却する
+     *
+     * @return
+     */
     public static Task prototype() {
         return new Task(TaskId.random(), "", "");
     }

@@ -12,7 +12,7 @@ public class Workspace {
      */
     String name;
     /**
-     * タスク
+     * タスクセット
      */
     TaskSet tasks;
 
@@ -21,6 +21,12 @@ public class Workspace {
         this.tasks = TaskSet.empty();
     }
 
+    /**
+     * タスクを追加する
+     *
+     * @param task 追加するタスク
+     * @return タスクが追加されたタスクセット
+     */
     public TaskSet add(Task task) {
         this.tasks = this.tasks.put(task);
         return this.tasks;
