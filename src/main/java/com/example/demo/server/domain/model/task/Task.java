@@ -9,7 +9,7 @@ public class Task {
     /**
      * ID
      */
-    TaskId id;
+    final TaskId id;
     /**
      * タイトル
      */

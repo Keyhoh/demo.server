@@ -11,7 +11,7 @@ public class Workspace {
     /**
      * ID
      */
-    WorkspaceId id;
+    final WorkspaceId id;
 
     /**
      * 名前
