@@ -8,7 +8,7 @@ import java.util.Map;
  * タスクセット
  */
 public class TaskSet {
-    private final Map<TaskId, Task> values;
+    final Map<TaskId, Task> values;
 
     private TaskSet(Map<TaskId, Task> values) {
         this.values = Collections.unmodifiableMap(values);
