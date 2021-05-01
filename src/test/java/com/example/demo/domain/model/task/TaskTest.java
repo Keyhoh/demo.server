@@ -7,9 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TaskTest {
     @Test
     void prototype() {
-        TaskPOJO task = TaskPOJO.toPOJO(Task.prototype());
-        assertThat(task.id).isNotBlank();
-        assertThat(task.title).isEmpty();
-        assertThat(task.description).isEmpty();
+        TaskPOJO actual = TaskPOJO.toPOJO(Task.prototype());
+        assertThat(actual.id).isNotBlank();
+        assertThat(actual.title).isEmpty();
+        assertThat(actual.description).isEmpty();
     }
 }
