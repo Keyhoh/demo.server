@@ -8,22 +8,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 class WorkspaceTest {
     @Test
     void initial_workspace() {
-        Workspace workspace = new Workspace("test workspace");
+        Workspace workspace = Workspace.create("test workspace");
         WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        assertThat(actual.id).isNotBlank();
         assertThat(actual.name).isEqualTo("test workspace");
         assertThat(actual.tasks).isEmpty();
     }
 
     @Test
     void rename() {
-        Workspace workspace = new Workspace("test workspace");
+        Workspace workspace = Workspace.create("test workspace");
         workspace.rename("new workspace name");
         assertThat(workspace.name).isEqualTo("new workspace name");
     }
 
     @Test
     void cannot_rename_to_blank() {
-        Workspace workspace = new Workspace("test workspace");
+        Workspace workspace = Workspace.create("test workspace");
         String[] blanks = {
                 null,
                 "",
@@ -44,7 +45,7 @@ class WorkspaceTest {
 
     @Test
     void put_task() {
-        Workspace workspace = new Workspace("test workspace");
+        Workspace workspace = Workspace.create("test workspace");
         workspace.add(Task.prototype());
         WorkspacePOJO actual = new WorkspacePOJO(workspace);
         assertThat(actual.tasks).isNotEmpty();
@@ -52,7 +53,7 @@ class WorkspaceTest {
 
     @Test
     void put_task_twice() {
-        Workspace workspace = new Workspace("test workspace");
+        Workspace workspace = Workspace.create("test workspace");
         workspace.add(Task.prototype());
         workspace.add(Task.prototype());
         WorkspacePOJO actual = new WorkspacePOJO(workspace);
@@ -61,7 +62,7 @@ class WorkspaceTest {
 
     @Test
     void put_the_same_task() {
-        Workspace workspace = new Workspace("test workspace");
+        Workspace workspace = Workspace.create("test workspace");
         Task task = Task.prototype();
         workspace.add(task);
         workspace.add(task);
@@ -71,7 +72,7 @@ class WorkspaceTest {
 
     @Test
     void remove_task() {
-        Workspace workspace = new Workspace("test workspace");
+        Workspace workspace = Workspace.create("test workspace");
         Task task = Task.prototype();
         {
             workspace.add(task);
@@ -87,7 +88,7 @@ class WorkspaceTest {
 
     @Test
     void remove_the_other_task() {
-        Workspace workspace = new Workspace("test workspace");
+        Workspace workspace = Workspace.create("test workspace");
         {
             workspace.add(Task.prototype());
             WorkspacePOJO actual = new WorkspacePOJO(workspace);

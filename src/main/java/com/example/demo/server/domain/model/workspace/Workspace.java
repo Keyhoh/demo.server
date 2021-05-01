@@ -9,6 +9,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Workspace {
     /**
+     * ワークスペースID
+     */
+    WorkspaceId id;
+
+    /**
      * 名前
      */
     String name;
@@ -17,9 +22,14 @@ public class Workspace {
      */
     TaskSet tasks;
 
-    public Workspace(String name) {
+    Workspace(WorkspaceId id, String name) {
+        this.id = id;
         this.name = name;
         this.tasks = TaskSet.empty();
+    }
+
+    public static Workspace create(String name) {
+        return new Workspace(WorkspaceId.generate(), name);
     }
 
     /**
