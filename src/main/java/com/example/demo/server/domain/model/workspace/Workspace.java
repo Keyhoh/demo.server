@@ -5,11 +5,11 @@ import com.example.demo.server.domain.model.task.TaskSet;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * ワークスペース
+ * *ワークスペース
  */
 public class Workspace {
     /**
-     * ワークスペースID
+     * ID
      */
     WorkspaceId id;
 

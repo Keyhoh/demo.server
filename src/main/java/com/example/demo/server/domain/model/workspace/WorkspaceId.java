@@ -3,7 +3,7 @@ package com.example.demo.server.domain.model.workspace;
 import java.util.UUID;
 
 /**
- * ワークスペース
+ * ワークスペースID
  */
 public class WorkspaceId {
     private final UUID value;
@@ -12,6 +12,11 @@ public class WorkspaceId {
         this.value = value;
     }
 
+    /**
+     * 新規IDを発行する
+     *
+     * @return 新規ID
+     */
     public static WorkspaceId generate() {
         return new WorkspaceId(UUID.randomUUID());
     }

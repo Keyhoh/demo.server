@@ -9,7 +9,7 @@ class WorkspaceTest {
     @Test
     void initial_workspace() {
         Workspace workspace = Workspace.create("test workspace");
-        WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        WorkspacePOJO actual = WorkspacePOJO.from(workspace);
         assertThat(actual.id).isNotBlank();
         assertThat(actual.name).isEqualTo("test workspace");
         assertThat(actual.tasks).isEmpty();
@@ -38,7 +38,7 @@ class WorkspaceTest {
         };
         for (String blank : blanks) {
             workspace.rename(blank);
-            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            WorkspacePOJO actual = WorkspacePOJO.from(workspace);
             assertThat(actual.name).isEqualTo("test workspace");
         }
     }
@@ -47,7 +47,7 @@ class WorkspaceTest {
     void put_task() {
         Workspace workspace = Workspace.create("test workspace");
         workspace.add(Task.prototype());
-        WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        WorkspacePOJO actual = WorkspacePOJO.from(workspace);
         assertThat(actual.tasks).isNotEmpty();
     }
 
@@ -56,7 +56,7 @@ class WorkspaceTest {
         Workspace workspace = Workspace.create("test workspace");
         workspace.add(Task.prototype());
         workspace.add(Task.prototype());
-        WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        WorkspacePOJO actual = WorkspacePOJO.from(workspace);
         assertThat(actual.tasks).hasSize(2);
     }
 
@@ -66,7 +66,7 @@ class WorkspaceTest {
         Task task = Task.prototype();
         workspace.add(task);
         workspace.add(task);
-        WorkspacePOJO actual = new WorkspacePOJO(workspace);
+        WorkspacePOJO actual = WorkspacePOJO.from(workspace);
         assertThat(actual.tasks).hasSize(1);
     }
 
@@ -76,12 +76,12 @@ class WorkspaceTest {
         Task task = Task.prototype();
         {
             workspace.add(task);
-            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            WorkspacePOJO actual = WorkspacePOJO.from(workspace);
             assertThat(actual.tasks).isNotEmpty();
         }
         {
             workspace.remove(task);
-            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            WorkspacePOJO actual = WorkspacePOJO.from(workspace);
             assertThat(actual.tasks).isEmpty();
         }
     }
@@ -91,12 +91,12 @@ class WorkspaceTest {
         Workspace workspace = Workspace.create("test workspace");
         {
             workspace.add(Task.prototype());
-            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            WorkspacePOJO actual = WorkspacePOJO.from(workspace);
             assertThat(actual.tasks).isNotEmpty();
         }
         {
             workspace.remove(Task.prototype());
-            WorkspacePOJO actual = new WorkspacePOJO(workspace);
+            WorkspacePOJO actual = WorkspacePOJO.from(workspace);
             assertThat(actual.tasks).isNotEmpty();
         }
     }

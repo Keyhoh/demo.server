@@ -1,7 +1,7 @@
 package com.example.demo.server.domain.model.task;
 
 /**
- * タスク
+ * *タスク
  * TODO: ステータス
  * TODO: 期限
  */
