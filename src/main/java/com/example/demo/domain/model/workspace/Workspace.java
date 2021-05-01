@@ -1,4 +1,4 @@
-package com.example.demo.domain.model;
+package com.example.demo.domain.model.workspace;
 
 import com.example.demo.domain.model.task.Task;
 import com.example.demo.domain.model.task.TaskSet;
@@ -16,7 +16,7 @@ public class Workspace {
      */
     TaskSet tasks;
 
-    Workspace(String name) {
+    public Workspace(String name) {
         this.name = name;
         this.tasks = TaskSet.empty();
     }
