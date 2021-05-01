@@ -38,4 +38,35 @@ class TaskSetTest {
         List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
         assertThat(actual).hasSize(1);
     }
+
+    @Test
+    void remove() {
+        TaskSet tasks = TaskSet.empty();
+        Task task = Task.prototype();
+        {
+            tasks = tasks.put(task);
+            List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
+            assertThat(actual).isNotEmpty();
+        }
+        {
+            tasks = tasks.remove(task.id);
+            List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
+            assertThat(actual).isEmpty();
+        }
+    }
+
+    @Test
+    void remove_the_other() {
+        TaskSet tasks = TaskSet.empty();
+        {
+            tasks = tasks.put(Task.prototype());
+            List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
+            assertThat(actual).isNotEmpty();
+        }
+        {
+            tasks = tasks.remove(TaskId.generate());
+            List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
+            assertThat(actual).isNotEmpty();
+        }
+    }
 }

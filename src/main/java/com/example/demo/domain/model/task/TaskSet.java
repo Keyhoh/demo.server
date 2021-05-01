@@ -34,4 +34,16 @@ public class TaskSet {
         values.put(task.id, task);
         return new TaskSet(values);
     }
+
+    /**
+     * タスクを削除する
+     *
+     * @param id 削除するタスクID
+     * @return タスクが削除されたタスクセット
+     */
+    public TaskSet remove(TaskId id) {
+        Map<TaskId, Task> values = new HashMap<>(this.values);
+        values.remove(id);
+        return new TaskSet(values);
+    }
 }
