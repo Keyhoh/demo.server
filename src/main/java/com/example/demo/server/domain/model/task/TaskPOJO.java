@@ -23,7 +23,7 @@ public class TaskPOJO {
      * @param task タスク
      * @return タスクPOJO
      */
-    public static TaskPOJO toPOJO(Task task) {
+    public static TaskPOJO from(Task task) {
         return new TaskPOJO(task);
     }
 
@@ -33,7 +33,7 @@ public class TaskPOJO {
      * @param taskSet タスクセット
      * @return タスクセットPOJO
      */
-    public static List<TaskPOJO> toPOJOList(TaskSet taskSet) {
-        return taskSet.values.values().stream().map(TaskPOJO::toPOJO).collect(Collectors.toList());
+    public static List<TaskPOJO> from(TaskSet taskSet) {
+        return taskSet.values.values().stream().map(TaskPOJO::from).collect(Collectors.toList());
     }
 }

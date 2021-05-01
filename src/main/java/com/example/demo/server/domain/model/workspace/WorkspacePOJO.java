@@ -10,6 +10,6 @@ public class WorkspacePOJO {
 
     public WorkspacePOJO(Workspace workspace) {
         this.name = workspace.name;
-        this.tasks = TaskPOJO.toPOJOList(workspace.tasks);
+        this.tasks = TaskPOJO.from(workspace.tasks);
     }
 }
