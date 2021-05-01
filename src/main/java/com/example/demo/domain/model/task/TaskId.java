@@ -6,7 +6,12 @@ package com.example.demo.domain.model.task;
  * TODO: hash関数
  */
 public class TaskId {
-    public static TaskId random() {
+    /**
+     * 新規IDを発行する
+     *
+     * @return 新規ID
+     */
+    public static TaskId generate() {
         return new TaskId();
     }
 }

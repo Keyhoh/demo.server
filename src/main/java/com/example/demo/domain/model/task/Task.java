@@ -26,11 +26,11 @@ public class Task {
     }
 
     /**
-     * 基礎タスクを返却する
+     * 基礎タスクを生成する
      *
-     * @return
+     * @return 基礎タスク
      */
     public static Task prototype() {
-        return new Task(TaskId.random(), "", "");
+        return new Task(TaskId.generate(), "", "");
     }
 }
