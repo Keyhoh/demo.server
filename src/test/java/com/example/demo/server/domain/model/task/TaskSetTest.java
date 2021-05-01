@@ -1,5 +1,6 @@
-package com.example.demo.domain.model.task;
+package com.example.demo.server.domain.model.task;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,7 +11,7 @@ class TaskSetTest {
     @Test
     void empty() {
         List<TaskPOJO> actual = TaskPOJO.toPOJOList(TaskSet.empty());
-        assertThat(actual).isEmpty();
+        Assertions.assertThat(actual).isEmpty();
     }
 
     @Test
@@ -18,7 +19,7 @@ class TaskSetTest {
         TaskSet tasks = TaskSet.empty();
         tasks = tasks.put(Task.prototype());
         List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
-        assertThat(actual).isNotEmpty();
+        Assertions.assertThat(actual).isNotEmpty();
     }
 
     @Test
@@ -27,7 +28,7 @@ class TaskSetTest {
         tasks = tasks.put(Task.prototype());
         tasks = tasks.put(Task.prototype());
         List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
-        assertThat(actual).hasSize(2);
+        Assertions.assertThat(actual).hasSize(2);
     }
 
     @Test
@@ -36,7 +37,7 @@ class TaskSetTest {
         Task task = Task.prototype();
         tasks = tasks.put(task).put(task);
         List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
-        assertThat(actual).hasSize(1);
+        Assertions.assertThat(actual).hasSize(1);
     }
 
     @Test
@@ -46,12 +47,12 @@ class TaskSetTest {
         {
             tasks = tasks.put(task);
             List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
-            assertThat(actual).isNotEmpty();
+            Assertions.assertThat(actual).isNotEmpty();
         }
         {
             tasks = tasks.remove(task);
             List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
-            assertThat(actual).isEmpty();
+            Assertions.assertThat(actual).isEmpty();
         }
     }
 
@@ -61,12 +62,12 @@ class TaskSetTest {
         {
             tasks = tasks.put(Task.prototype());
             List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
-            assertThat(actual).isNotEmpty();
+            Assertions.assertThat(actual).isNotEmpty();
         }
         {
             tasks = tasks.remove(Task.prototype());
             List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
-            assertThat(actual).isNotEmpty();
+            Assertions.assertThat(actual).isNotEmpty();
         }
     }
 }

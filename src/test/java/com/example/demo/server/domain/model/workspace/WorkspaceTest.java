@@ -1,7 +1,7 @@
-package com.example.demo.domain.model.workspace;
+package com.example.demo.server.domain.model.workspace;
 
-import com.example.demo.domain.model.task.Task;
-import com.example.demo.domain.model.task.TaskPOJO;
+import com.example.demo.server.domain.model.task.Task;
+import com.example.demo.server.domain.model.task.TaskPOJO;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.demo.domain.model.task;
+package com.example.demo.server.domain.model.task;
 
 import java.util.List;
 import java.util.stream.Collectors;
