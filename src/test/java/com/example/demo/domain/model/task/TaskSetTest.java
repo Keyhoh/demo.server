@@ -20,4 +20,22 @@ class TaskSetTest {
         List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
         assertThat(actual).isNotEmpty();
     }
+
+    @Test
+    void put_twice() {
+        TaskSet tasks = TaskSet.empty();
+        tasks = tasks.put(Task.prototype());
+        tasks = tasks.put(Task.prototype());
+        List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
+        assertThat(actual).hasSize(2);
+    }
+
+    @Test
+    void put_the_same() {
+        TaskSet tasks = TaskSet.empty();
+        Task task = Task.prototype();
+        tasks = tasks.put(task).put(task);
+        List<TaskPOJO> actual = TaskPOJO.toPOJOList(tasks);
+        assertThat(actual).hasSize(1);
+    }
 }
