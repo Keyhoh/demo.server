@@ -24,6 +24,23 @@ class WorkspaceTest {
     }
 
     @Test
+    void cannot_rename_to_blank() {
+        Workspace actual = new Workspace("test workspace");
+        actual.rename(null);
+        assertThat(actual.name).isEqualTo("test workspace");
+        actual.rename("");
+        assertThat(actual.name).isEqualTo("test workspace");
+        actual.rename(" "); // space
+        assertThat(actual.name).isEqualTo("test workspace");
+        actual.rename("  "); // two spaces
+        assertThat(actual.name).isEqualTo("test workspace");
+        actual.rename("	"); // tab
+        assertThat(actual.name).isEqualTo("test workspace");
+        actual.rename("　"); // full-width space
+        assertThat(actual.name).isEqualTo("test workspace");
+    }
+
+    @Test
     void put_task() {
         Workspace workspace = new Workspace("test workspace");
         workspace.add(Task.prototype());

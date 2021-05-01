@@ -2,6 +2,7 @@ package com.example.demo.server.domain.model.workspace;
 
 import com.example.demo.server.domain.model.task.Task;
 import com.example.demo.server.domain.model.task.TaskSet;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * ワークスペース
@@ -23,11 +24,14 @@ public class Workspace {
 
     /**
      * ワークスペースの名前を変更する
+     *
      * @param name 新しい名前
      * @return ワークスペース
      */
     public Workspace rename(String name) {
-        this.name = name;
+        if (StringUtils.isNoneBlank(name)) {
+            this.name = name;
+        }
         return this;
     }
 
