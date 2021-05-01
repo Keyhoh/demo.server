@@ -30,6 +30,7 @@ class WorkspaceTest {
                 " ", // space
                 "  ", // two spaces
                 "	",  // tab
+                "\t",  // tab
                 "　", // full-width space
                 "\n",
                 "\r\n"
