@@ -22,6 +22,16 @@ public class Workspace {
     }
 
     /**
+     * ワークスペースの名前を変更する
+     * @param name 新しい名前
+     * @return ワークスペース
+     */
+    public Workspace rename(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
      * タスクを追加する
      *
      * @param task 追加するタスク

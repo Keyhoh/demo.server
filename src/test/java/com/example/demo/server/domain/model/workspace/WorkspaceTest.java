@@ -17,6 +17,13 @@ class WorkspaceTest {
     }
 
     @Test
+    void rename() {
+        Workspace actual = new Workspace("test workspace");
+        actual.rename("new workspace name");
+        assertThat(actual.name).isEqualTo("new workspace name");
+    }
+
+    @Test
     void put_task() {
         Workspace workspace = new Workspace("test workspace");
         workspace.add(Task.prototype());
