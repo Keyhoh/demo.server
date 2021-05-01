@@ -5,6 +5,10 @@ package com.example.demo.domain.model.task;
  */
 public class Task {
     /**
+     * ID
+     */
+    TaskId id;
+    /**
      * タイトル
      */
     String title;
@@ -13,8 +17,13 @@ public class Task {
      */
     String description;
 
-    Task(String title, String description) {
+    Task(TaskId id, String title, String description) {
+        this.id = id;
         this.title = title;
         this.description = description;
+    }
+
+    public static Task prototype() {
+        return new Task(TaskId.random(), "", "");
     }
 }

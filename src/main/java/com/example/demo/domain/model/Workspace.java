@@ -1,9 +1,7 @@
 package com.example.demo.domain.model;
 
 import com.example.demo.domain.model.task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.demo.domain.model.task.TaskSet;
 
 /**
  * ワークスペース
@@ -16,10 +14,15 @@ public class Workspace {
     /**
      * タスク
      */
-    List<Task> tasks;
+    TaskSet tasks;
 
     Workspace(String name) {
         this.name = name;
-        this.tasks = new ArrayList<>();
+        this.tasks = TaskSet.empty();
+    }
+
+    public TaskSet add(Task task) {
+        this.tasks = this.tasks.put(task);
+        return this.tasks;
     }
 }
