@@ -1,5 +1,7 @@
 package com.example.demo.server.domain.model.task;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * *タスク
  * TODO: ステータス
@@ -35,6 +37,9 @@ public class Task {
     }
 
     public Task changeTitle(String title) {
-        return new Task(this.id, title, this.description);
+        if (StringUtils.isNotBlank(title)) {
+            return new Task(this.id, title, this.description);
+        }
+        return this;
     }
 }

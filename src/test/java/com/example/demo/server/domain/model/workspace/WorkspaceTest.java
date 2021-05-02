@@ -2,6 +2,8 @@ package com.example.demo.server.domain.model.workspace;
 
 import com.example.demo.server.domain.model.task.Task;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,25 +24,22 @@ class WorkspaceTest {
         assertThat(workspace.name).isEqualTo("new workspace name");
     }
 
-    @Test
-    void cannot_rename_to_blank() {
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "",
+            " ", // space
+            "  ", // two spaces
+            "	",  // tab
+            "\t",  // tab
+            "　", // full-width space
+            "\n",
+            "\r\n"
+    })
+    void cannot_rename_to_blank(String blank) {
         Workspace workspace = Workspace.create("test workspace");
-        String[] blanks = {
-                null,
-                "",
-                " ", // space
-                "  ", // two spaces
-                "	",  // tab
-                "\t",  // tab
-                "　", // full-width space
-                "\n",
-                "\r\n"
-        };
-        for (String blank : blanks) {
-            workspace.rename(blank);
-            WorkspacePOJO actual = WorkspacePOJO.from(workspace);
-            assertThat(actual.name).isEqualTo("test workspace");
-        }
+        workspace.rename(blank);
+        WorkspacePOJO actual = WorkspacePOJO.from(workspace);
+        assertThat(actual.name).isEqualTo("test workspace");
     }
 
     @Test

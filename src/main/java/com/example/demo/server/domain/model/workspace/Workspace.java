@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * *ワークスペース
+ * TODO: 不変オブジェクトにすべきか
  */
 public class Workspace {
     /**
