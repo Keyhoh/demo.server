@@ -60,7 +60,7 @@ class TaskTest {
             "\n",
             "\r\n"
     })
-    void cannot_change_discription_to_blank(String blank) {
+    void cannot_change_description_to_blank(String blank) {
         Task task = Task.prototype().changeDescription("description");
         task = task.changeDescription(blank);
         TaskPOJO actual = TaskPOJO.from(task);
