@@ -33,4 +33,8 @@ public class Task {
     public static Task prototype() {
         return new Task(TaskId.generate(), "", "");
     }
+
+    public Task changeTitle(String title) {
+        return new Task(this.id, title, this.description);
+    }
 }

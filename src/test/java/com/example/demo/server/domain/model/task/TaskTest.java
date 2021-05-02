@@ -12,4 +12,12 @@ class TaskTest {
         assertThat(actual.title).isEmpty();
         assertThat(actual.description).isEmpty();
     }
+
+    @Test
+    void changeTitle() {
+        Task task = Task.prototype();
+        task = task.changeTitle("new title");
+        TaskPOJO actual = TaskPOJO.from(task);
+        assertThat(actual.title).isEqualTo("new title");
+    }
 }
