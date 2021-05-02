@@ -40,4 +40,30 @@ class TaskTest {
         TaskPOJO actual = TaskPOJO.from(task);
         assertThat(actual.title).isEqualTo("title");
     }
+
+    @Test
+    void change_description() {
+        Task task = Task.prototype();
+        task = task.changeDescription("new description");
+        TaskPOJO actual = TaskPOJO.from(task);
+        assertThat(actual.description).isEqualTo("new description");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "",
+            " ", // space
+            "  ", // two spaces
+            "	",  // tab
+            "\t",  // tab
+            "　", // full-width space
+            "\n",
+            "\r\n"
+    })
+    void cannot_change_discription_to_blank(String blank) {
+        Task task = Task.prototype().changeDescription("description");
+        task = task.changeDescription(blank);
+        TaskPOJO actual = TaskPOJO.from(task);
+        assertThat(actual.description).isEqualTo("description");
+    }
 }
