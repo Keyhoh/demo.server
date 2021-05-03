@@ -16,6 +16,12 @@ public class WorkspaceController {
         this.workspaceService = workspaceService;
     }
 
+    /**
+     * ワークスペースを新しくつくる
+     *
+     * @param name ワークスペース名
+     * @return 新規ワークスペース
+     */
     @PostMapping("create")
     public WorkspacePOJO create(@RequestBody String name) {
         return this.workspaceService.create(name);
