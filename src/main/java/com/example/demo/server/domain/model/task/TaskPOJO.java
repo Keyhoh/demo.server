@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
  * タスクPOJO
  */
 public class TaskPOJO {
-    public String id;
-    public String title;
-    public String description;
+    final public String id;
+    final public String title;
+    final public String description;
 
     private TaskPOJO(Task task) {
         this.id = task.id.toString();
@@ -34,6 +34,6 @@ public class TaskPOJO {
      * @return タスクセットPOJO
      */
     public static List<TaskPOJO> from(TaskSet taskSet) {
-        return taskSet.values.values().stream().map(TaskPOJO::from).collect(Collectors.toList());
+        return taskSet.values.values().stream().map(TaskPOJO::from).collect(Collectors.toUnmodifiableList());
     }
 }

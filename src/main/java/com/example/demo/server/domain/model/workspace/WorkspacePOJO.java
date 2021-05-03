@@ -8,9 +8,9 @@ import java.util.List;
  * ワークスペースPOJO
  */
 public class WorkspacePOJO {
-    public String id;
-    public String name;
-    public List<TaskPOJO> tasks;
+    final public String id;
+    final public String name;
+    final public List<TaskPOJO> tasks;
 
     public WorkspacePOJO(Workspace workspace) {
         this.id = workspace.id.toString();
