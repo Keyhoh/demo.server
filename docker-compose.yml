@@ -6,6 +6,8 @@ services:
     ports:
       - ${DB_PORT}:5432
     environment:
+      TZ: Asia/Tokyo
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DATABASE: ${DB}
+    volumes:
+      - ./ddl:/docker-entrypoint-initdb.d

@@ -17,7 +17,7 @@ public class WorkspaceController {
     }
 
     /**
-     * ワークスペースを新しくつくる
+     * ワークスペースを作成する
      *
      * @param name ワークスペース名
      * @return 新規ワークスペース
