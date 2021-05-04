@@ -35,7 +35,7 @@ class TaskControllerTest {
 
         Set<TaskPOJO> expected = this.workspaceMapper.selectWorkspaceTasks(target.id);
         assertThat(actual).isEqualTo(expected)
-                .size().isEqualTo(5);
+                .size().isEqualTo(tasks.size() + 1);
     }
 
     @Test
