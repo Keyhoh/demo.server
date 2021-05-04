@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 class TaskSetTest {
     @Test
     void empty() {
@@ -17,16 +15,33 @@ class TaskSetTest {
     @Test
     void put() {
         TaskSet tasks = TaskSet.empty();
+
         tasks = tasks.put(Task.prototype());
+
         List<TaskPOJO> actual = TaskPOJO.from(tasks);
-        Assertions.assertThat(actual).isNotEmpty();
+        Assertions.assertThat(actual).size().isEqualTo(1);
+    }
+
+    @Test
+    void put_another() {
+        TaskSet tasks = TaskSet.empty();
+        Task task = Task.prototype();
+        tasks = tasks.put(task);
+        {
+            tasks = tasks.put(TaskPOJO.from(task).build());
+
+            List<TaskPOJO> actual = TaskPOJO.from(tasks);
+            Assertions.assertThat(actual).size().isEqualTo(1);
+        }
     }
 
     @Test
     void put_twice() {
         TaskSet tasks = TaskSet.empty();
+
         tasks = tasks.put(Task.prototype());
         tasks = tasks.put(Task.prototype());
+
         List<TaskPOJO> actual = TaskPOJO.from(tasks);
         Assertions.assertThat(actual).hasSize(2);
     }
@@ -35,7 +50,9 @@ class TaskSetTest {
     void put_the_same() {
         TaskSet tasks = TaskSet.empty();
         Task task = Task.prototype();
+
         tasks = tasks.put(task).put(task);
+
         List<TaskPOJO> actual = TaskPOJO.from(tasks);
         Assertions.assertThat(actual).hasSize(1);
     }
@@ -46,14 +63,28 @@ class TaskSetTest {
         Task task = Task.prototype();
         {
             tasks = tasks.put(task);
+
             List<TaskPOJO> actual = TaskPOJO.from(tasks);
             Assertions.assertThat(actual).isNotEmpty();
         }
         {
             tasks = tasks.remove(task);
+
             List<TaskPOJO> actual = TaskPOJO.from(tasks);
             Assertions.assertThat(actual).isEmpty();
         }
+    }
+
+    @Test
+    void remove_another() {
+        TaskSet tasks = TaskSet.empty();
+        Task task = Task.prototype();
+        tasks = tasks.put(task);
+
+        tasks = tasks.remove(TaskPOJO.from(task).build());
+
+        List<TaskPOJO> actual = TaskPOJO.from(tasks);
+        Assertions.assertThat(actual).isEmpty();
     }
 
     @Test
@@ -61,11 +92,13 @@ class TaskSetTest {
         TaskSet tasks = TaskSet.empty();
         {
             tasks = tasks.put(Task.prototype());
+
             List<TaskPOJO> actual = TaskPOJO.from(tasks);
             Assertions.assertThat(actual).isNotEmpty();
         }
         {
             tasks = tasks.remove(Task.prototype());
+
             List<TaskPOJO> actual = TaskPOJO.from(tasks);
             Assertions.assertThat(actual).isNotEmpty();
         }

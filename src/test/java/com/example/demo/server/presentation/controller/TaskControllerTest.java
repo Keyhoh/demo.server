@@ -1,7 +1,6 @@
 package com.example.demo.server.presentation.controller;
 
 import com.example.demo.server.domain.model.task.TaskPOJO;
-import com.example.demo.server.domain.model.workspace.Workspace;
 import com.example.demo.server.domain.model.workspace.WorkspacePOJO;
 import com.example.demo.server.infrastructure.datasource.task.TaskMapper;
 import com.example.demo.server.infrastructure.datasource.workspace.WorkspaceMapper;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,27 +26,30 @@ class TaskControllerTest {
 
     @Test
     void add() {
-        WorkspacePOJO workspace = WorkspaceUtil.generate();
-        this.workspaceMapper.insertWorkspace(workspace);
-        List<TaskPOJO> tasks = TaskUtil.generate(16);
-        this.taskMapper.insertTasks(workspace.id, tasks);
+        WorkspacePOJO target = WorkspaceUtil.generate();
+        this.workspaceMapper.insertWorkspace(target);
+        List<TaskPOJO> tasks = TaskUtil.generate(4);
+        this.taskMapper.insertTasks(target.id, tasks);
 
-        List<TaskPOJO> actual = this.taskController.add(workspace.id);
+        List<TaskPOJO> actual = this.taskController.add(target.id);
 
-        List<TaskPOJO> expected = this.workspaceMapper.selectWorkspaceTasks(workspace.id);
-        assertThat(actual).isEqualTo(expected);
+        List<TaskPOJO> expected = this.workspaceMapper.selectWorkspaceTasks(target.id);
+        assertThat(actual).containsExactlyInAnyOrder(expected.toArray(TaskPOJO[]::new))
+                .size().isEqualTo(5);
     }
 
     @Test
     void remove() {
         WorkspacePOJO workspace = WorkspaceUtil.generate();
         this.workspaceMapper.insertWorkspace(workspace);
-        List<TaskPOJO> tasks = TaskUtil.generate(16);
-        this.taskMapper.insertTasks(workspace.id, tasks);
+        TaskPOJO target = TaskUtil.generate();
+        this.taskMapper.insertTasks(workspace.id, Collections.singletonList(target));
 
-        List<TaskPOJO> actual = this.taskController.add(workspace.id);
+        List<TaskPOJO> expected = TaskUtil.generate(4);
+        this.taskMapper.insertTasks(workspace.id, expected);
 
-        List<TaskPOJO> expected = this.workspaceMapper.selectWorkspaceTasks(workspace.id);
-        assertThat(actual).isEqualTo(expected);
+        List<TaskPOJO> actual = this.taskController.remove(workspace.id, target.id);
+
+        assertThat(actual).containsExactlyInAnyOrder(expected.toArray(TaskPOJO[]::new));
     }
 }
