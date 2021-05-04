@@ -21,6 +21,26 @@ public class TaskId {
         return new TaskId(UUID.randomUUID());
     }
 
+    /**
+     * UUIDからIDを構築する
+     *
+     * @param uuid UUID
+     * @return タスクID
+     */
+    public static TaskId of(UUID uuid) {
+        return new TaskId(uuid);
+    }
+
+    /**
+     * StringからIDを構築する
+     *
+     * @param s ID String
+     * @return タスクID
+     */
+    public static TaskId of(String s) {
+        return TaskId.of(UUID.fromString(s));
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();

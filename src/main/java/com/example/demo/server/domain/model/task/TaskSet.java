@@ -10,7 +10,7 @@ import java.util.Map;
 public class TaskSet {
     final Map<TaskId, Task> values;
 
-    private TaskSet(Map<TaskId, Task> values) {
+    TaskSet(Map<TaskId, Task> values) {
         this.values = Collections.unmodifiableMap(values);
     }
 

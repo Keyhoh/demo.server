@@ -22,14 +22,14 @@ public class Workspace {
      */
     TaskSet tasks;
 
-    Workspace(WorkspaceId id, String name) {
+    Workspace(WorkspaceId id, String name, TaskSet tasks) {
         this.id = id;
         this.name = name;
-        this.tasks = TaskSet.empty();
+        this.tasks = tasks;
     }
 
     public static Workspace create(String name) {
-        return new Workspace(WorkspaceId.generate(), name);
+        return new Workspace(WorkspaceId.generate(), name, TaskSet.empty());
     }
 
     /**

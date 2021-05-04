@@ -2,6 +2,7 @@ package com.example.demo.server.application.service;
 
 import com.example.demo.server.application.repository.WorkspaceRepository;
 import com.example.demo.server.domain.model.workspace.Workspace;
+import com.example.demo.server.domain.model.workspace.WorkspaceId;
 import com.example.demo.server.domain.model.workspace.WorkspacePOJO;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,19 @@ public class WorkspaceService {
      */
     public WorkspacePOJO create(String name) {
         Workspace workspace = Workspace.create(name);
-        workspaceRepository.register(workspace);
+        this.workspaceRepository.register(workspace);
         return WorkspacePOJO.from(Workspace.create(name));
+    }
+
+    /**
+     * ワークスペースを取得する
+     *
+     * @param value ワークスペースID
+     * @return ワークスペース
+     */
+    public WorkspacePOJO findById(String value) {
+        WorkspaceId id = WorkspaceId.of(value);
+        Workspace workspace = this.workspaceRepository.findBy(id);
+        return WorkspacePOJO.from(workspace);
     }
 }

@@ -21,6 +21,14 @@ public class WorkspaceId {
         return new WorkspaceId(UUID.randomUUID());
     }
 
+    public static WorkspaceId of(UUID uuid) {
+        return new WorkspaceId(uuid);
+    }
+
+    public static WorkspaceId of(String s) {
+        return WorkspaceId.of(UUID.fromString(s));
+    }
+
     @Override
     public String toString() {
         return this.value.toString();

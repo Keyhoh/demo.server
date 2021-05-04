@@ -7,4 +7,9 @@
         INSERT INTO workspace (id, name)
         VALUES (#{workspace.id}, #{workspace.name});
     </insert>
+    <select id="selectWorkspace" resultType="com.example.demo.server.domain.model.workspace.WorkspacePOJO">
+        SELECT id as "workspace.id", name as "workspace.name"
+        FROM workspace
+        WHERE id=#{id}
+    </select>
 </mapper>

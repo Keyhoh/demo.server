@@ -1,6 +1,11 @@
 package com.example.demo.server.domain.model.task;
 
-import java.util.List;
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -36,4 +41,48 @@ public class TaskPOJO {
     public static List<TaskPOJO> from(TaskSet taskSet) {
         return taskSet.values.values().stream().map(TaskPOJO::from).collect(Collectors.toUnmodifiableList());
     }
+
+    /**
+     * タスクを構築する
+     *
+     * @return タスク
+     */
+    public Task build() {
+        return new Task(TaskId.of(this.id), this.title, this.description);
+    }
+
+    /**
+     * タスクセットCollector
+     */
+    public static Collector<Task, Map<TaskId, Task>, TaskSet> collector = new Collector<>() {
+
+        @Override
+        public Supplier<Map<TaskId, Task>> supplier() {
+            return HashMap::new;
+        }
+
+        @Override
+        public BiConsumer<Map<TaskId, Task>, Task> accumulator() {
+            return (map, task) -> map.put(task.id, task);
+        }
+
+        @Override
+        public BinaryOperator<Map<TaskId, Task>> combiner() {
+            return (m1, m2) -> {
+                for (Map.Entry<TaskId, Task> e : m2.entrySet())
+                    m1.merge(e.getKey(), e.getValue(), (task1, task2) -> task2);
+                return m1;
+            };
+        }
+
+        @Override
+        public Function<Map<TaskId, Task>, TaskSet> finisher() {
+            return TaskSet::new;
+        }
+
+        @Override
+        public Set<Characteristics> characteristics() {
+            return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED));
+        }
+    };
 }

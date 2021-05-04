@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface WorkspaceMapper {
     void insertWorkspace(@Param("workspace") WorkspacePOJO workspace);
+
+    WorkspacePOJO selectWorkspace(@Param("id") String id);
 }
