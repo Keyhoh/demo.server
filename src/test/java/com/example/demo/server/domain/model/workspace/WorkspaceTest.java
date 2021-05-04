@@ -20,7 +20,7 @@ class WorkspaceTest {
     @Test
     void rename() {
         Workspace workspace = Workspace.create("test workspace");
-        workspace.rename("new workspace name");
+        workspace.renameTo("new workspace name");
         assertThat(workspace.name).isEqualTo("new workspace name");
     }
 
@@ -37,7 +37,7 @@ class WorkspaceTest {
     })
     void cannot_rename_to_blank(String blank) {
         Workspace workspace = Workspace.create("test workspace");
-        workspace.rename(blank);
+        workspace.renameTo(blank);
         WorkspacePOJO actual = WorkspacePOJO.from(workspace);
         assertThat(actual.name).isEqualTo("test workspace");
     }

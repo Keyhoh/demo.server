@@ -37,4 +37,17 @@ public class WorkspaceService {
         Workspace workspace = this.workspaceRepository.findBy(id);
         return WorkspacePOJO.from(workspace);
     }
+
+
+    /**
+     * ワークスペースの名前を変更する
+     *
+     * @param targetId 対象ワークスペースID
+     * @param newName  新しい名前
+     */
+    public void rename(String targetId, String newName) {
+        Workspace workspace = this.workspaceRepository.findBy(WorkspaceId.of(targetId));
+        workspace = workspace.renameTo(newName);
+        this.workspaceRepository.update(workspace);
+    }
 }

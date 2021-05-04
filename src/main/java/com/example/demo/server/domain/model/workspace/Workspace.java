@@ -35,12 +35,12 @@ public class Workspace {
     /**
      * ワークスペースの名前を変更する
      *
-     * @param name 新しい名前
+     * @param newName 新しい名前
      * @return ワークスペース
      */
-    public Workspace rename(String name) {
-        if (StringUtils.isNoneBlank(name)) {
-            this.name = name;
+    public Workspace renameTo(String newName) {
+        if (StringUtils.isNoneBlank(newName)) {
+            this.name = newName;
         }
         return this;
     }

@@ -24,4 +24,9 @@ public class WorkspaceDatasource implements WorkspaceRepository {
         WorkspacePOJO workspacePOJO = this.workspaceMapper.selectWorkspace(id.toString());
         return workspacePOJO.build();
     }
+
+    @Override
+    public void update(final Workspace workspace) {
+        this.workspaceMapper.updateWorkspace(WorkspacePOJO.from(workspace));
+    }
 }

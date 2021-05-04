@@ -10,6 +10,11 @@
     <select id="selectWorkspace" resultType="com.example.demo.server.domain.model.workspace.WorkspacePOJO">
         SELECT id as "workspace.id", name as "workspace.name"
         FROM workspace
-        WHERE id=#{id}
+        WHERE id = #{id}
     </select>
+    <update id="updateWorkspace">
+        UPDATE workspace
+        SET name = #{workspace.name}
+        WHERE id = #{workspace.id}
+    </update>
 </mapper>

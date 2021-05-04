@@ -7,4 +7,6 @@ public interface WorkspaceRepository {
     void register(Workspace workspace);
 
     Workspace findBy(WorkspaceId id);
+
+    void update(Workspace workspace);
 }

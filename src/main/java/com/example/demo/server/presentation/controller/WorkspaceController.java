@@ -24,8 +24,25 @@ public class WorkspaceController {
         return this.workspaceService.create(name);
     }
 
+    /**
+     * ワークスペースを取得する
+     *
+     * @param id ワークスペースID
+     * @return ワークスペース
+     */
     @GetMapping("{id}")
     public WorkspacePOJO get(@PathVariable String id) {
         return this.workspaceService.findById(id);
+    }
+
+    /**
+     * ワークスペースをリネームする
+     *
+     * @param id   ワークスペースID
+     * @param name 新しい名前
+     */
+    @PutMapping("{id}/rename")
+    public void rename(@PathVariable final String id, @RequestBody String name) {
+        this.workspaceService.rename(id, name);
     }
 }
