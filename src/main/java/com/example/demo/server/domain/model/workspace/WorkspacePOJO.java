@@ -56,16 +56,16 @@ public class WorkspacePOJO {
 
         final WorkspacePOJO that = (WorkspacePOJO) o;
 
-        if (!id.equals(that.id)) return false;
-        if (!name.equals(that.name)) return false;
-        return tasks.equals(that.tasks);
+        if (!this.id.equals(that.id)) return false;
+        if (!this.name.equals(that.name)) return false;
+        return this.tasks.equals(that.tasks);
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + tasks.hashCode();
+        int result = this.id.hashCode();
+        result = 31 * result + this.name.hashCode();
+        result = 31 * result + this.tasks.hashCode();
         return result;
     }
 }

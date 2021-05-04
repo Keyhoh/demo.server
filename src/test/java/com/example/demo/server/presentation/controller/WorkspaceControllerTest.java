@@ -19,13 +19,13 @@ class WorkspaceControllerTest {
 
     private Workspace workspace() {
         Workspace workspace = Workspace.create("new workspace");
-        workspaceRepository.register(workspace);
+        this.workspaceRepository.register(workspace);
         return workspace;
     }
 
     @Test
     void create() {
-        WorkspacePOJO actual = workspaceController.create("workspace name");
+        WorkspacePOJO actual = this.workspaceController.create("workspace name");
         assertThat(actual.id).isNotBlank();
         assertThat(actual.name).isEqualTo("workspace name");
         assertThat(actual.tasks).isEmpty();
@@ -36,7 +36,7 @@ class WorkspaceControllerTest {
         Workspace workspace = workspace();
         WorkspacePOJO expected = WorkspacePOJO.from(workspace);
 
-        WorkspacePOJO actual = workspaceController.get(expected.id);
+        WorkspacePOJO actual = this.workspaceController.get(expected.id);
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -45,9 +45,9 @@ class WorkspaceControllerTest {
         Workspace workspace = workspace();
         WorkspacePOJO target = WorkspacePOJO.from(workspace);
 
-        workspaceController.rename(target.id, "renamed workspace");
+        this.workspaceController.rename(target.id, "renamed workspace");
 
-        Workspace renamed = workspaceRepository.findBy(WorkspaceId.of(target.id));
+        Workspace renamed = this.workspaceRepository.findBy(WorkspaceId.of(target.id));
         WorkspacePOJO actual = WorkspacePOJO.from(renamed);
         assertThat(actual.name).isEqualTo("renamed workspace");
     }

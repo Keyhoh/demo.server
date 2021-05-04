@@ -54,7 +54,7 @@ public class TaskPOJO {
     /**
      * タスクセットCollector
      */
-    public static Collector<Task, Map<TaskId, Task>, TaskSet> collector = new Collector<>() {
+    public static final Collector<Task, Map<TaskId, Task>, TaskSet> collector = new Collector<>() {
 
         @Override
         public Supplier<Map<TaskId, Task>> supplier() {

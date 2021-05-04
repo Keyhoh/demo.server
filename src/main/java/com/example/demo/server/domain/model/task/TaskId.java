@@ -43,7 +43,7 @@ public class TaskId {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.value.hashCode();
     }
 
     @Override
