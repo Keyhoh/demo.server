@@ -22,12 +22,25 @@ public class TaskUseCase {
         this.workspaceService = workspaceService;
     }
 
+    /**
+     * タスクを追加する
+     *
+     * @param workspaceId 対象ワークスペース
+     * @return タスク一覧
+     */
     public Set<TaskPOJO> add(String workspaceId) {
         Workspace workspace = this.workspaceService.findBy(WorkspaceId.of(workspaceId));
         TaskSet tasks = this.taskService.add(workspace);
         return TaskPOJO.from(tasks);
     }
 
+    /**
+     * タスクを削除する
+     *
+     * @param workspaceId 対象ワークスペース
+     * @param targetId    対象タスク
+     * @return タスク一覧
+     */
     public Set<TaskPOJO> remove(String workspaceId, String targetId) {
         Workspace workspace = this.workspaceService.findBy(WorkspaceId.of(workspaceId));
         Task task = this.taskService.findBy(TaskId.of(targetId));
