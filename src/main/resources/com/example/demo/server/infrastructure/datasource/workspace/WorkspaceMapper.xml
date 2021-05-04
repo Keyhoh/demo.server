@@ -3,14 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.server.infrastructure.datasource.workspace.WorkspaceMapper">
+    <select id="selectWorkspaceTasks" resultType="com.example.demo.server.domain.model.task.TaskPOJO">
+        SELECT id as "task.id", title as "task.title", description as "task.description"
+        FROM task
+        WHERE workspace_id = #{id}
+    </select>
+    <resultMap id="workspace" type="com.example.demo.server.domain.model.workspace.WorkspacePOJO">
+        <id property="id" column="workspace.id"/>
+        <result property="name" column="workspace.name"/>
+        <collection property="tasks" ofType="com.example.demo.server.domain.model.task.TaskPOJO" column="workspace.id"
+                    select="selectWorkspaceTasks"/>
+    </resultMap>
     <insert id="insertWorkspace">
         INSERT INTO workspace (id, name)
         VALUES (#{workspace.id}, #{workspace.name});
     </insert>
-    <select id="selectWorkspace" resultType="com.example.demo.server.domain.model.workspace.WorkspacePOJO">
-        SELECT id as "workspace.id", name as "workspace.name"
+    <select id="selectWorkspace" resultMap="workspace">
+        SELECT workspace.id   as "workspace.id",
+               workspace.name as "workspace.name"
         FROM workspace
-        WHERE id = #{id}
+        WHERE workspace.id = #{id}
     </select>
     <update id="updateWorkspace">
         UPDATE workspace

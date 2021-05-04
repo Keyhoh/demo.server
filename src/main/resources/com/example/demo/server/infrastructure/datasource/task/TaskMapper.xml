@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.server.infrastructure.datasource.task.TaskMapper">
+    <insert id="insertTasks" parameterType="java.util.List">
+        <foreach collection="tasks" item="task">
+            INSERT INTO task (id, workspace_id, title, description)
+            VALUES (#{task.id}, #{workspaceId}, #{task.title}, #{task.description});
+        </foreach>
+    </insert>
+    <select id="selectTask" resultType="com.example.demo.server.domain.model.task.TaskPOJO">
+        SELECT id as "task.id", title as "task.title", description as "task.description"
+        FROM task
+        WHERE id = #{id}
+    </select>
+    <update id="deleteTasks">
+        DELETE
+        FROM task
+        WHERE workspace_id = #{workspaceId}
+    </update>
+</mapper>

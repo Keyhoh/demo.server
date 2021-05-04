@@ -25,10 +25,11 @@ class WorkspaceControllerTest {
 
     @Test
     void create() {
-        WorkspacePOJO actual = this.workspaceController.create("workspace name");
-        assertThat(actual.id).isNotBlank();
-        assertThat(actual.name).isEqualTo("workspace name");
-        assertThat(actual.tasks).isEmpty();
+        WorkspacePOJO expected = this.workspaceController.create("workspace name");
+
+        Workspace actual = this.workspaceRepository.findBy(WorkspaceId.of(expected.id));
+        assertThat(actual).isNotNull();
+        assertThat(WorkspacePOJO.from(actual)).isEqualTo(expected);
     }
 
     @Test

@@ -16,10 +16,14 @@ public class TaskPOJO {
     final public String title;
     final public String description;
 
+    private TaskPOJO(String id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
     private TaskPOJO(Task task) {
-        this.id = task.id.toString();
-        this.title = task.title;
-        this.description = task.description;
+        this(task.id.toString(), task.title, task.description);
     }
 
     /**
@@ -85,4 +89,24 @@ public class TaskPOJO {
             return Collections.unmodifiableSet(EnumSet.of(Characteristics.UNORDERED));
         }
     };
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final TaskPOJO taskPOJO = (TaskPOJO) o;
+
+        if (!this.id.equals(taskPOJO.id)) return false;
+        if (!this.title.equals(taskPOJO.title)) return false;
+        return this.description.equals(taskPOJO.description);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = this.id.hashCode();
+        result = 31 * result + this.title.hashCode();
+        result = 31 * result + this.description.hashCode();
+        return result;
+    }
 }

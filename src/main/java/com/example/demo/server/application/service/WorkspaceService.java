@@ -22,17 +22,16 @@ public class WorkspaceService {
     public Workspace create(String name) {
         Workspace workspace = Workspace.create(name);
         this.workspaceRepository.register(workspace);
-        return Workspace.create(name);
+        return workspace;
     }
 
     /**
      * ワークスペースを取得する
      *
-     * @param value ワークスペースID
+     * @param id ワークスペースID
      * @return ワークスペース
      */
-    public Workspace findById(String value) {
-        WorkspaceId id = WorkspaceId.of(value);
+    public Workspace findBy(WorkspaceId id) {
         return this.workspaceRepository.findBy(id);
     }
 
@@ -41,7 +40,7 @@ public class WorkspaceService {
      * ワークスペースの名前を変更する
      *
      * @param workspace 対象ワークスペース
-     * @param newName  新しい名前
+     * @param newName   新しい名前
      */
     public void rename(Workspace workspace, String newName) {
         workspace = workspace.renameTo(newName);
