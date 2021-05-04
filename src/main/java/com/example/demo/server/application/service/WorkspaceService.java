@@ -3,7 +3,6 @@ package com.example.demo.server.application.service;
 import com.example.demo.server.application.repository.WorkspaceRepository;
 import com.example.demo.server.domain.model.workspace.Workspace;
 import com.example.demo.server.domain.model.workspace.WorkspaceId;
-import com.example.demo.server.domain.model.workspace.WorkspacePOJO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,10 +19,10 @@ public class WorkspaceService {
      * @param name ワークスペース名
      * @return 新規ワークスペース
      */
-    public WorkspacePOJO create(String name) {
+    public Workspace create(String name) {
         Workspace workspace = Workspace.create(name);
         this.workspaceRepository.register(workspace);
-        return WorkspacePOJO.from(Workspace.create(name));
+        return Workspace.create(name);
     }
 
     /**
@@ -32,21 +31,19 @@ public class WorkspaceService {
      * @param value ワークスペースID
      * @return ワークスペース
      */
-    public WorkspacePOJO findById(String value) {
+    public Workspace findById(String value) {
         WorkspaceId id = WorkspaceId.of(value);
-        Workspace workspace = this.workspaceRepository.findBy(id);
-        return WorkspacePOJO.from(workspace);
+        return this.workspaceRepository.findBy(id);
     }
 
 
     /**
      * ワークスペースの名前を変更する
      *
-     * @param targetId 対象ワークスペースID
+     * @param workspace 対象ワークスペース
      * @param newName  新しい名前
      */
-    public void rename(String targetId, String newName) {
-        Workspace workspace = this.workspaceRepository.findBy(WorkspaceId.of(targetId));
+    public void rename(Workspace workspace, String newName) {
         workspace = workspace.renameTo(newName);
         this.workspaceRepository.update(workspace);
     }
