@@ -5,11 +5,11 @@ import com.example.demo.server.domain.model.workspace.WorkspacePOJO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface WorkspaceMapper {
-    List<TaskPOJO> selectWorkspaceTasks(@Param("id") String id);
+    Set<TaskPOJO> selectWorkspaceTasks(@Param("id") String id);
 
     void insertWorkspace(@Param("workspace") WorkspacePOJO workspace);
 

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.server.infrastructure.datasource.task.TaskMapper">
-    <insert id="insertTasks" parameterType="java.util.List">
+    <insert id="insertTasks" parameterType="java.util.Set">
         <foreach collection="tasks" item="task">
             INSERT INTO task (id, workspace_id, title, description)
             VALUES (#{task.id}, #{workspaceId}, #{task.title}, #{task.description});

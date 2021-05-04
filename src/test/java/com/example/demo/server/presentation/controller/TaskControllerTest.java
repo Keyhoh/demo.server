@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,13 +28,13 @@ class TaskControllerTest {
     void add() {
         WorkspacePOJO target = WorkspaceUtil.generate();
         this.workspaceMapper.insertWorkspace(target);
-        List<TaskPOJO> tasks = TaskUtil.generate(4);
+        Set<TaskPOJO> tasks = TaskUtil.generate(4);
         this.taskMapper.insertTasks(target.id, tasks);
 
-        List<TaskPOJO> actual = this.taskController.add(target.id);
+        Set<TaskPOJO> actual = this.taskController.add(target.id);
 
-        List<TaskPOJO> expected = this.workspaceMapper.selectWorkspaceTasks(target.id);
-        assertThat(actual).containsExactlyInAnyOrder(expected.toArray(TaskPOJO[]::new))
+        Set<TaskPOJO> expected = this.workspaceMapper.selectWorkspaceTasks(target.id);
+        assertThat(actual).isEqualTo(expected)
                 .size().isEqualTo(5);
     }
 
@@ -43,13 +43,13 @@ class TaskControllerTest {
         WorkspacePOJO workspace = WorkspaceUtil.generate();
         this.workspaceMapper.insertWorkspace(workspace);
         TaskPOJO target = TaskUtil.generate();
-        this.taskMapper.insertTasks(workspace.id, Collections.singletonList(target));
+        this.taskMapper.insertTasks(workspace.id, Collections.singleton(target));
 
-        List<TaskPOJO> expected = TaskUtil.generate(4);
+        Set<TaskPOJO> expected = TaskUtil.generate(4);
         this.taskMapper.insertTasks(workspace.id, expected);
 
-        List<TaskPOJO> actual = this.taskController.remove(workspace.id, target.id);
+        Set<TaskPOJO> actual = this.taskController.remove(workspace.id, target.id);
 
-        assertThat(actual).containsExactlyInAnyOrder(expected.toArray(TaskPOJO[]::new));
+        assertThat(actual).isEqualTo(expected);
     }
 }

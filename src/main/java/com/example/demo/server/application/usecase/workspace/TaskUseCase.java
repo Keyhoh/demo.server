@@ -10,7 +10,7 @@ import com.example.demo.server.domain.model.workspace.Workspace;
 import com.example.demo.server.domain.model.workspace.WorkspaceId;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Set;
 
 @Component
 public class TaskUseCase {
@@ -22,13 +22,13 @@ public class TaskUseCase {
         this.workspaceService = workspaceService;
     }
 
-    public List<TaskPOJO> add(String workspaceId) {
+    public Set<TaskPOJO> add(String workspaceId) {
         Workspace workspace = this.workspaceService.findBy(WorkspaceId.of(workspaceId));
         TaskSet tasks = this.taskService.add(workspace);
         return TaskPOJO.from(tasks);
     }
 
-    public List<TaskPOJO> remove(String workspaceId, String targetId) {
+    public Set<TaskPOJO> remove(String workspaceId, String targetId) {
         Workspace workspace = this.workspaceService.findBy(WorkspaceId.of(workspaceId));
         Task task = this.taskService.findBy(TaskId.of(targetId));
         TaskSet tasks = this.taskService.remove(workspace, task);

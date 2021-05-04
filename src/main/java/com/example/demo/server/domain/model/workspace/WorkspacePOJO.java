@@ -4,7 +4,7 @@ import com.example.demo.server.domain.model.task.TaskPOJO;
 import com.example.demo.server.domain.model.task.TaskSet;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 /**
  * ワークスペースPOJO
@@ -12,16 +12,16 @@ import java.util.List;
 public class WorkspacePOJO {
     final public String id;
     final public String name;
-    final public List<TaskPOJO> tasks;
+    final public Set<TaskPOJO> tasks;
 
-    private WorkspacePOJO(String id, String name, List<TaskPOJO> tasks) {
+    private WorkspacePOJO(String id, String name, Set<TaskPOJO> tasks) {
         this.id = id;
         this.name = name;
         this.tasks = tasks;
     }
 
     private WorkspacePOJO(String id, String name) {
-        this(id, name, Collections.emptyList());
+        this(id, name, Collections.emptySet());
     }
 
     private WorkspacePOJO(Workspace workspace) {

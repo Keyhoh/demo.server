@@ -42,8 +42,8 @@ public class TaskPOJO {
      * @param taskSet タスクセット
      * @return タスクセットPOJO
      */
-    public static List<TaskPOJO> from(TaskSet taskSet) {
-        return taskSet.values.values().stream().map(TaskPOJO::from).collect(Collectors.toUnmodifiableList());
+    public static Set<TaskPOJO> from(TaskSet taskSet) {
+        return taskSet.values.values().stream().map(TaskPOJO::from).collect(Collectors.toUnmodifiableSet());
     }
 
     /**

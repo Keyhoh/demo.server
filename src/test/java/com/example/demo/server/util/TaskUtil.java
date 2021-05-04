@@ -4,7 +4,7 @@ import com.example.demo.server.domain.model.task.Task;
 import com.example.demo.server.domain.model.task.TaskPOJO;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,11 +13,11 @@ public class TaskUtil {
         return TaskPOJO.from(Task.prototype());
     }
 
-    public static List<TaskPOJO> generate(int size) {
-        if (size <= 0) return Collections.emptyList();
+    public static Set<TaskPOJO> generate(int size) {
+        if (size <= 0) return Collections.emptySet();
 
         return IntStream.range(0, size)
                 .mapToObj(i -> TaskUtil.generate())
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }
