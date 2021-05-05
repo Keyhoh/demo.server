@@ -6,6 +6,9 @@ import com.example.demo.server.domain.model.workspace.WorkspaceId;
 import com.example.demo.server.domain.model.workspace.WorkspacePOJO;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class WorkspaceUseCase {
     private final WorkspaceService workspaceService;
@@ -26,6 +29,18 @@ public class WorkspaceUseCase {
     }
 
     /**
+     * ワークスペースを全取得する
+     *
+     * @return ワークスペース一覧
+     */
+    public Set<WorkspacePOJO> findAll() {
+        return this.workspaceService.findAll()
+                .stream()
+                .map(WorkspacePOJO::from)
+                .collect(Collectors.toSet());
+    }
+
+    /**
      * ワークスペースを取得する
      *
      * @param value ワークスペースID
@@ -39,8 +54,9 @@ public class WorkspaceUseCase {
 
     /**
      * ワークスペースの名前を変更する
+     *
      * @param targetId 対象ワークスペース
-     * @param newName 新しい名前
+     * @param newName  新しい名前
      */
     public void rename(String targetId, String newName) {
         WorkspaceId id = WorkspaceId.of(targetId);

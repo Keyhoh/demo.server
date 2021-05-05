@@ -13,6 +13,8 @@ public interface WorkspaceMapper {
 
     void insertWorkspace(@Param("workspace") WorkspacePOJO workspace);
 
+    Set<WorkspacePOJO> selectWorkspaces();
+
     WorkspacePOJO selectWorkspace(@Param("id") String id);
 
     void updateWorkspace(@Param("workspace") WorkspacePOJO workspacePOJO);

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -26,11 +28,21 @@ class WorkspaceControllerTest {
     }
 
     @Test
+    void getAll() {
+        this.workspaceMapper.insertWorkspace(WorkspaceUtil.generate());
+
+        Set<WorkspacePOJO> actual = this.workspaceController.getAll();
+
+        Set<WorkspacePOJO> expected = this.workspaceMapper.selectWorkspaces();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
     void get() {
         WorkspacePOJO expected = WorkspaceUtil.generate();
         this.workspaceMapper.insertWorkspace(expected);
 
-        WorkspacePOJO actual = this.workspaceController.get(expected.id);
+        WorkspacePOJO actual = this.workspaceController.getAll(expected.id);
 
         assertThat(actual).isEqualTo(expected);
     }

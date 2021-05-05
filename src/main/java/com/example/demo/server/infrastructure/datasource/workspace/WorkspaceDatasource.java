@@ -6,6 +6,9 @@ import com.example.demo.server.domain.model.workspace.WorkspaceId;
 import com.example.demo.server.domain.model.workspace.WorkspacePOJO;
 import org.springframework.stereotype.Repository;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Repository
 public class WorkspaceDatasource implements WorkspaceRepository {
     private final WorkspaceMapper workspaceMapper;
@@ -17,6 +20,14 @@ public class WorkspaceDatasource implements WorkspaceRepository {
     @Override
     public void register(final Workspace workspace) {
         this.workspaceMapper.insertWorkspace(WorkspacePOJO.from(workspace));
+    }
+
+    @Override
+    public Set<Workspace> findAll() {
+        return this.workspaceMapper.selectWorkspaces()
+                .stream()
+                .map(WorkspacePOJO::build)
+                .collect(Collectors.toSet());
     }
 
     @Override

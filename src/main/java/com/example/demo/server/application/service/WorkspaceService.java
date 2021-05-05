@@ -5,6 +5,8 @@ import com.example.demo.server.domain.model.workspace.Workspace;
 import com.example.demo.server.domain.model.workspace.WorkspaceId;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class WorkspaceService {
     private final WorkspaceRepository workspaceRepository;
@@ -23,6 +25,15 @@ public class WorkspaceService {
         Workspace workspace = Workspace.create(name);
         this.workspaceRepository.register(workspace);
         return workspace;
+    }
+
+    /**
+     * ワークスペースを全取得する
+     *
+     * @return ワークスペース一覧
+     */
+    public Set<Workspace> findAll() {
+        return this.workspaceRepository.findAll();
     }
 
     /**

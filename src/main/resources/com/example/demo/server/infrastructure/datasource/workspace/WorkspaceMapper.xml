@@ -18,6 +18,11 @@
         INSERT INTO workspace (id, name)
         VALUES (#{workspace.id}, #{workspace.name});
     </insert>
+    <select id="selectWorkspaces" resultMap="workspace">
+        SELECT workspace.id   as "workspace.id",
+               workspace.name as "workspace.name"
+        FROM workspace
+    </select>
     <select id="selectWorkspace" resultMap="workspace">
         SELECT workspace.id   as "workspace.id",
                workspace.name as "workspace.name"

@@ -4,6 +4,8 @@ import com.example.demo.server.application.usecase.workspace.WorkspaceUseCase;
 import com.example.demo.server.domain.model.workspace.WorkspacePOJO;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("workspaces")
 public class WorkspaceController {
@@ -25,13 +27,23 @@ public class WorkspaceController {
     }
 
     /**
+     * ワークスペースを全取得する
+     *
+     * @return ワークスペース一覧
+     */
+    @GetMapping
+    public Set<WorkspacePOJO> getAll() {
+        return this.workspaceUseCase.findAll();
+    }
+
+    /**
      * ワークスペースを取得する
      *
      * @param id ワークスペースID
      * @return ワークスペース
      */
     @GetMapping("{id}")
-    public WorkspacePOJO get(@PathVariable String id) {
+    public WorkspacePOJO getAll(@PathVariable String id) {
         return this.workspaceUseCase.findById(id);
     }
 
