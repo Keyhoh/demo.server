@@ -21,7 +21,7 @@ public class WorkspaceController {
      * @param name ワークスペース名
      * @return 新規ワークスペース
      */
-    @PostMapping("create")
+    @PostMapping
     public WorkspacePOJO create(@RequestBody String name) {
         return this.workspaceUseCase.create(name);
     }
@@ -43,7 +43,7 @@ public class WorkspaceController {
      * @return ワークスペース
      */
     @GetMapping("{id}")
-    public WorkspacePOJO getAll(@PathVariable String id) {
+    public WorkspacePOJO get(@PathVariable String id) {
         return this.workspaceUseCase.findById(id);
     }
 

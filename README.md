@@ -1,10 +1,21 @@
 # DEMO SERVER
 
-## environment variables
+タスクボードAPIサーバ
+
+## Run Application
 
 ```shell
+# Set environment variables
 export $(.env)
+# Start up Database server
+docker-compose up -d
+# Run Spring Application
+./gradlew clean bootRun
 ```
+
+[API Documentation](https://localhost:8080/swagger-ui/#/)
+
+## Environment Variables
 
 |name|value|
 |:---|:---|

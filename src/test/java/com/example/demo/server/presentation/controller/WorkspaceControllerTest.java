@@ -42,7 +42,7 @@ class WorkspaceControllerTest {
         WorkspacePOJO expected = WorkspaceUtil.generate();
         this.workspaceMapper.insertWorkspace(expected);
 
-        WorkspacePOJO actual = this.workspaceController.getAll(expected.id);
+        WorkspacePOJO actual = this.workspaceController.get(expected.id);
 
         assertThat(actual).isEqualTo(expected);
     }
